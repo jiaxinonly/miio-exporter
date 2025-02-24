@@ -1,0 +1,279 @@
+devices:
+- model: chuangmi.plug.212a01
+  name: 米家智能插座2 蓝牙网关版
+  services:
+  - name: switch
+    description: Switch
+    siid: 2
+    properties:
+    - name: 'on'
+      standard_name: ''
+      description: Switch Status
+      description_cn: ''
+      piid: 1
+      format: bool
+      unit: ''
+      access:
+      - read
+      - write
+      - notify
+      value-range: []
+    - name: temperature
+      standard_name: ''
+      description: Temperature
+      description_cn: ''
+      piid: 6
+      format: uint8
+      unit: celsius
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 255
+      - 1
+    - name: working-time
+      standard_name: ''
+      description: Working Time
+      description_cn: ''
+      piid: 7
+      format: uint32
+      unit: minutes
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 300
+      - 1
+  - name: indicator-light
+    description: Indicator Light
+    siid: 3
+    properties:
+    - name: 'on'
+      standard_name: ''
+      description: Switch Status
+      description_cn: ''
+      piid: 1
+      format: bool
+      unit: ''
+      access:
+      - read
+      - write
+      - notify
+      value-range: []
+  - name: power-consumption
+    description: Power Consumption
+    siid: 5
+    properties:
+    - name: power-consumption
+      standard_name: ''
+      description: Power Consumption
+      description_cn: ''
+      piid: 1
+      format: uint32
+      unit: none
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 65535000
+      - 1
+    - name: electric-current
+      standard_name: ''
+      description: Electric Current
+      description_cn: ''
+      piid: 2
+      format: uint16
+      unit: ''
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 65535
+      - 1
+    - name: voltage
+      standard_name: ''
+      description: Voltage
+      description_cn: ''
+      piid: 3
+      format: uint16
+      unit: ''
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 65535
+      - 1
+    - name: electric-power
+      standard_name: ''
+      description: Electric Power
+      description_cn: ''
+      piid: 6
+      format: uint32
+      unit: watt
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 6553500
+      - 1
+    - name: surge-power
+      standard_name: ''
+      description: Surge power
+      description_cn: ''
+      piid: 7
+      format: uint32
+      unit: ''
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 65525
+      - 1
+  - name: imilab-timer
+    description: imilab-timer
+    siid: 4
+    properties:
+    - name: on-duration
+      standard_name: ''
+      description: on-duration
+      description_cn: ''
+      piid: 1
+      format: uint32
+      unit: seconds
+      access:
+      - read
+      - notify
+      - write
+      value-range:
+      - 0
+      - 86500
+      - 1
+    - name: off-duration
+      standard_name: ''
+      description: off-duration
+      description_cn: ''
+      piid: 2
+      format: uint32
+      unit: seconds
+      access:
+      - read
+      - notify
+      - write
+      value-range:
+      - 0
+      - 86500
+      - 1
+    - name: countdown
+      standard_name: ''
+      description: countdown
+      description_cn: ''
+      piid: 3
+      format: uint32
+      unit: seconds
+      access:
+      - read
+      - notify
+      - write
+      value-range:
+      - 0
+      - 86500
+      - 1
+    - name: task-switch
+      standard_name: ''
+      description: task-switch
+      description_cn: ''
+      piid: 4
+      format: bool
+      unit: none
+      access:
+      - read
+      - notify
+      - write
+      value-range: []
+    - name: countdown-info
+      standard_name: ''
+      description: countdown-info
+      description_cn: ''
+      piid: 5
+      format: bool
+      unit: none
+      access:
+      - read
+      - notify
+      value-range: []
+    - name: switch-toggle
+      standard_name: ''
+      description: switch-toggle
+      description_cn: ''
+      piid: 6
+      format: bool
+      unit: none
+      access:
+      - write
+      value-range: []
+  - name: relay-event
+    description: relay-event
+    siid: 6
+    properties:
+    - name: switch-event
+      standard_name: ''
+      description: switch-event
+      description_cn: ''
+      piid: 1
+      format: bool
+      unit: none
+      access:
+      - notify
+      value-range: []
+  - name: functions-enable
+    description: functions-enable
+    siid: 7
+    properties:
+    - name: power-enable
+      standard_name: ''
+      description: power-enable
+      description_cn: ''
+      piid: 1
+      format: bool
+      unit: ''
+      access:
+      - read
+      - notify
+      - write
+      value-range: []
+    - name: over-power
+      standard_name: ''
+      description: ''
+      description_cn: ''
+      piid: 2
+      format: uint32
+      unit: ''
+      access:
+      - read
+      - notify
+      - write
+      value-range:
+      - 0
+      - 65525
+      - 1
+  - name: push-services
+    description: push-services
+    siid: 8
+    properties:
+    - name: over-power-limit
+      standard_name: ''
+      description: over-power-limit
+      description_cn: ''
+      piid: 1
+      format: bool
+      unit: ''
+      access:
+      - notify
+      value-range: []
