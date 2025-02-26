@@ -7,9 +7,9 @@ devices:
     siid: 2
     properties:
     - name: 'on'
-      standard_name: ''
+      standard_name: 'switch_status'
       description: Switch Status
-      description_cn: ''
+      description_cn: '开关状态'
       piid: 1
       format: bool
       unit: ''
@@ -19,9 +19,9 @@ devices:
       - notify
       value-range: []
     - name: temperature
-      standard_name: ''
+      standard_name: temperature
       description: Temperature
-      description_cn: ''
+      description_cn: '温度'
       piid: 6
       format: uint8
       unit: celsius
@@ -33,9 +33,9 @@ devices:
       - 255
       - 1
     - name: working-time
-      standard_name: ''
+      standard_name: working_time
       description: Working Time
-      description_cn: ''
+      description_cn: '工作时间'
       piid: 7
       format: uint32
       unit: minutes
@@ -51,9 +51,9 @@ devices:
     siid: 3
     properties:
     - name: 'on'
-      standard_name: ''
+      standard_name: 'indicator_light_status'
       description: Switch Status
-      description_cn: ''
+      description_cn: '指示灯状态'
       piid: 1
       format: bool
       unit: ''
@@ -62,88 +62,14 @@ devices:
       - write
       - notify
       value-range: []
-  - name: power-consumption
-    description: Power Consumption
-    siid: 5
-    properties:
-    - name: power-consumption
-      standard_name: ''
-      description: Power Consumption
-      description_cn: ''
-      piid: 1
-      format: uint32
-      unit: none
-      access:
-      - read
-      - notify
-      value-range:
-      - 0
-      - 65535000
-      - 1
-    - name: electric-current
-      standard_name: ''
-      description: Electric Current
-      description_cn: ''
-      piid: 2
-      format: uint16
-      unit: ''
-      access:
-      - read
-      - notify
-      value-range:
-      - 0
-      - 65535
-      - 1
-    - name: voltage
-      standard_name: ''
-      description: Voltage
-      description_cn: ''
-      piid: 3
-      format: uint16
-      unit: ''
-      access:
-      - read
-      - notify
-      value-range:
-      - 0
-      - 65535
-      - 1
-    - name: electric-power
-      standard_name: ''
-      description: Electric Power
-      description_cn: ''
-      piid: 6
-      format: uint32
-      unit: watt
-      access:
-      - read
-      - notify
-      value-range:
-      - 0
-      - 6553500
-      - 1
-    - name: surge-power
-      standard_name: ''
-      description: Surge power
-      description_cn: ''
-      piid: 7
-      format: uint32
-      unit: ''
-      access:
-      - read
-      - notify
-      value-range:
-      - 0
-      - 65525
-      - 1
   - name: imilab-timer
     description: imilab-timer
     siid: 4
     properties:
     - name: on-duration
-      standard_name: ''
+      standard_name: timer_on_duration
       description: on-duration
-      description_cn: ''
+      description_cn: '定时器打开时间'
       piid: 1
       format: uint32
       unit: seconds
@@ -156,9 +82,9 @@ devices:
       - 86500
       - 1
     - name: off-duration
-      standard_name: ''
+      standard_name: timer_off_duration
       description: off-duration
-      description_cn: ''
+      description_cn: '定时器关闭时间'
       piid: 2
       format: uint32
       unit: seconds
@@ -171,9 +97,9 @@ devices:
       - 86500
       - 1
     - name: countdown
-      standard_name: ''
+      standard_name: timer_countdown
       description: countdown
-      description_cn: ''
+      description_cn: '定时器倒计时'
       piid: 3
       format: uint32
       unit: seconds
@@ -186,9 +112,9 @@ devices:
       - 86500
       - 1
     - name: task-switch
-      standard_name: ''
+      standard_name: timer_task_switch
       description: task-switch
-      description_cn: ''
+      description_cn: '定时器任务开关'
       piid: 4
       format: bool
       unit: none
@@ -198,9 +124,9 @@ devices:
       - write
       value-range: []
     - name: countdown-info
-      standard_name: ''
+      standard_name: timer_countdown_info
       description: countdown-info
-      description_cn: ''
+      description_cn: '定时器倒计时信息'
       piid: 5
       format: bool
       unit: none
@@ -209,23 +135,97 @@ devices:
       - notify
       value-range: []
     - name: switch-toggle
-      standard_name: ''
+      standard_name: timer_switch_toggle
       description: switch-toggle
-      description_cn: ''
+      description_cn: '定时器开关'
       piid: 6
       format: bool
       unit: none
       access:
       - write
       value-range: []
+  - name: power-consumption
+    description: Power Consumption
+    siid: 5
+    properties:
+    - name: power-consumption
+      standard_name: power_consumption
+      description: Power Consumption
+      description_cn: '功耗'
+      piid: 1
+      format: uint32
+      unit: none
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 65535000
+      - 1
+    - name: electric-current
+      standard_name: electric_current
+      description: Electric Current
+      description_cn: '电流'
+      piid: 2
+      format: uint16
+      unit: ''
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 65535
+      - 1
+    - name: voltage
+      standard_name: voltage
+      description: Voltage
+      description_cn: '电压'
+      piid: 3
+      format: uint16
+      unit: ''
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 65535
+      - 1
+    - name: electric-power
+      standard_name: electric_power
+      description: Electric Power
+      description_cn: '功率'
+      piid: 6
+      format: uint32
+      unit: watt
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 6553500
+      - 1
+    - name: surge-power
+      standard_name: surge_power
+      description: Surge power
+      description_cn: '浪涌功率'
+      piid: 7
+      format: uint32
+      unit: ''
+      access:
+      - read
+      - notify
+      value-range:
+      - 0
+      - 65525
+      - 1
   - name: relay-event
     description: relay-event
     siid: 6
     properties:
     - name: switch-event
-      standard_name: ''
+      standard_name: switch_event
       description: switch-event
-      description_cn: ''
+      description_cn: '开关事件'
       piid: 1
       format: bool
       unit: none
@@ -237,9 +237,9 @@ devices:
     siid: 7
     properties:
     - name: power-enable
-      standard_name: ''
+      standard_name: power_enable
       description: power-enable
-      description_cn: ''
+      description_cn: '电源开启'
       piid: 1
       format: bool
       unit: ''
@@ -249,9 +249,9 @@ devices:
       - write
       value-range: []
     - name: over-power
-      standard_name: ''
+      standard_name: over_power
       description: ''
-      description_cn: ''
+      description_cn: '过载'
       piid: 2
       format: uint32
       unit: ''
@@ -268,9 +268,9 @@ devices:
     siid: 8
     properties:
     - name: over-power-limit
-      standard_name: ''
+      standard_name: over_power_limit
       description: over-power-limit
-      description_cn: ''
+      description_cn: '功率超过限制'
       piid: 1
       format: bool
       unit: ''
