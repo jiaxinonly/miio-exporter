@@ -3,193 +3,14 @@ devices:
     model: cuco.plug.v3
     name: 米家智能插座3
     services:
-    - name: over-use-ele-alert
-      description: over-use-ele-alert
-      siid: 10
-      properties:
-      - name: 'on'
-        standard_name: 'on'
-        description: 'on'
-        description_cn: ''
-        piid: 1
-        format: bool
-        unit: ''
-        access:
-        - read
-        - notify
-        - write
-        value-range: []
-      - name: over-ele-day
-        standard_name: over_ele_day
-        description: over-ele-day
-        description_cn: ''
-        piid: 2
-        format: uint16
-        unit: ''
-        access:
-        - read
-        - notify
-        - write
-        value-range:
-        - 1
-        - 60
-        - 1
-      - name: over-ele-month
-        standard_name: over_ele_month
-        description: over-ele-month
-        description_cn: ''
-        piid: 3
-        format: uint16
-        unit: ''
-        access:
-        - read
-        - notify
-        - write
-        value-range:
-        - 20
-        - 1800
-        - 20
-    - name: power-consumption
-      description: Power Consumption
-      siid: 11
-      properties:
-      - name: power-consumption
-        standard_name: power_consumption
-        description: Power Consumption
-        description_cn: ''
-        piid: 1
-        format: uint16
-        unit: ''
-        access:
-        - read
-        - notify
-        value-range:
-        - 0
-        - 65535
-        - 1
-      - name: electric-power
-        standard_name: electric_power
-        description: Electric Power
-        description_cn: ''
-        piid: 2
-        format: float
-        unit: watt
-        access:
-        - read
-        - notify
-        value-range:
-        - 0
-        - 10000
-        - 1
-    - name: on-off-count
-      description: on-off-count
-      siid: 12
-      properties:
-      - name: on-off-count
-        standard_name: on_off_count
-        description: on-off-count
-        description_cn: ''
-        piid: 1
-        format: uint8
-        unit: ''
-        access:
-        - read
-        - notify
-        value-range:
-        - 0
-        - 255
-        - 1
-      - name: temperature
-        standard_name: temperature
-        description: temperature
-        description_cn: ''
-        piid: 2
-        format: uint8
-        unit: celsius
-        access:
-        - read
-        - notify
-        value-range:
-        - 0
-        - 150
-        - 1
-    - name: indicator-light
-      description: Indicator Light
-      siid: 13
-      properties:
-      - name: 'on'
-        standard_name: 'on'
-        description: Switch Status
-        description_cn: ''
-        piid: 1
-        format: bool
-        unit: ''
-        access:
-        - read
-        - write
-        - notify
-        value-range: []
-    - name: charge-prt-ext
-      description: charge-prt-ext
-      siid: 14
-      properties:
-      - name: power
-        standard_name: power
-        description: power
-        description_cn: ''
-        piid: 1
-        format: uint16
-        unit: ''
-        access:
-        - read
-        - notify
-        - write
-        value-range:
-        - 2
-        - 600
-        - 1
-      - name: protect-time
-        standard_name: protect_time
-        description: protect-time
-        description_cn: ''
-        piid: 2
-        format: uint16
-        unit: ''
-        access:
-        - read
-        - notify
-        - write
-        value-range:
-        - 1
-        - 300
-        - 1
-    - name: power-limit-ext
-      description: power-limit-ext
-      siid: 15
-      properties:
-      - name: power-ext
-        standard_name: power_ext
-        description: power-ext
-        description_cn: ''
-        piid: 1
-        format: uint16
-        unit: watt
-        access:
-        - read
-        - notify
-        - write
-        value-range:
-        - 300
-        - 2500
-        - 100
     - name: switch
       description: Switch
       siid: 2
       properties:
       - name: 'on'
-        standard_name: 'on'
+        standard_name: 'switch_status'
         description: Switch Status
-        description_cn: ''
+        description_cn: '开关状态'
         piid: 1
         format: bool
         unit: ''
@@ -201,7 +22,7 @@ devices:
       - name: default-power-on-state
         standard_name: default_power_on_state
         description: Default Power On State
-        description_cn: ''
+        description_cn: '默认开机状态'
         piid: 2
         format: uint8
         unit: ''
@@ -214,9 +35,9 @@ devices:
         - 2
         - 1
       - name: fault
-        standard_name: fault
+        standard_name: device_fault
         description: Device Fault
-        description_cn: ''
+        description_cn: '设备故障'
         piid: 3
         format: uint8
         unit: ''
@@ -229,9 +50,9 @@ devices:
       siid: 3
       properties:
       - name: mode
-        standard_name: mode
+        standard_name: indicator_light_status
         description: mode
-        description_cn: ''
+        description_cn: '指示灯状态'
         piid: 2
         format: bool
         unit: ''
@@ -241,9 +62,9 @@ devices:
         - write
         value-range: []
       - name: start-time
-        standard_name: start_time
+        standard_name: indicator_light_start_time
         description: start-time
-        description_cn: ''
+        description_cn: '指示灯开启时间'
         piid: 3
         format: uint16
         unit: minutes
@@ -256,9 +77,9 @@ devices:
         - 1440
         - 1
       - name: end-time
-        standard_name: end_time
+        standard_name: indicator_light_end_time
         description: end-time
-        description_cn: ''
+        description_cn: '指示灯关闭时间'
         piid: 4
         format: uint16
         unit: minutes
@@ -275,9 +96,9 @@ devices:
       siid: 4
       properties:
       - name: 'on'
-        standard_name: 'on'
+        standard_name: 'charging_protection_status'
         description: 'on'
-        description_cn: ''
+        description_cn: '充电保护状态'
         piid: 1
         format: bool
         unit: ''
@@ -287,9 +108,9 @@ devices:
         - write
         value-range: []
       - name: power
-        standard_name: power
+        standard_name: charging_protection_power
         description: power
-        description_cn: ''
+        description_cn: '充电保护功率'
         piid: 2
         format: uint8
         unit: ''
@@ -302,9 +123,9 @@ devices:
         - 10
         - 1
       - name: protect-time
-        standard_name: protect_time
+        standard_name: charging_protection_protect_time
         description: protect-time
-        description_cn: ''
+        description_cn: '充电保护持续时长'
         piid: 3
         format: uint8
         unit: minutes
@@ -321,9 +142,9 @@ devices:
       siid: 5
       properties:
       - name: status
-        standard_name: status
+        standard_name: cycle_status
         description: status
-        description_cn: ''
+        description_cn: '循环状态'
         piid: 1
         format: bool
         unit: ''
@@ -333,9 +154,9 @@ devices:
         - write
         value-range: []
       - name: data-value
-        standard_name: data_value
+        standard_name: cycle_data_value
         description: data-value
-        description_cn: ''
+        description_cn: '循环数据值'
         piid: 2
         format: string
         unit: ''
@@ -351,7 +172,7 @@ devices:
       - name: physical-controls-locked
         standard_name: physical_controls_locked
         description: Physical Control Locked
-        description_cn: ''
+        description_cn: '物理控制锁定（童锁）'
         piid: 1
         format: bool
         unit: ''
@@ -365,9 +186,9 @@ devices:
       siid: 8
       properties:
       - name: 'on'
-        standard_name: 'on'
+        standard_name: 'quick_countdown_status'
         description: 'on'
-        description_cn: ''
+        description_cn: '快速倒计时状态'
         piid: 1
         format: bool
         unit: ''
@@ -411,9 +232,9 @@ devices:
       siid: 9
       properties:
       - name: 'on'
-        standard_name: 'on'
+        standard_name: 'max_power_limit_status'
         description: 'on'
-        description_cn: ''
+        description_cn: '最大功率限制状态'
         piid: 1
         format: bool
         unit: ''
@@ -423,9 +244,9 @@ devices:
         - write
         value-range: []
       - name: power
-        standard_name: power
+        standard_name: max_power_limit_power
         description: power
-        description_cn: ''
+        description_cn: '最大功率限制值'
         piid: 2
         format: uint16
         unit: watt
@@ -435,5 +256,184 @@ devices:
         - write
         value-range:
         - 1500
+        - 2500
+        - 100
+    - name: over-use-ele-alert
+      description: over-use-ele-alert
+      siid: 10
+      properties:
+      - name: 'on'
+        standard_name: 'over_use_ele_alert_status'
+        description: 'on'
+        description_cn: '过度用电告警状态'
+        piid: 1
+        format: bool
+        unit: ''
+        access:
+        - read
+        - notify
+        - write
+        value-range: []
+      - name: over-ele-day
+        standard_name: over_ele_day
+        description: over-ele-day
+        description_cn: '日用电量告警值'
+        piid: 2
+        format: uint16
+        unit: ''
+        access:
+        - read
+        - notify
+        - write
+        value-range:
+        - 1
+        - 60
+        - 1
+      - name: over-ele-month
+        standard_name: over_ele_month
+        description: over-ele-month
+        description_cn: '月用电量告警值'
+        piid: 3
+        format: uint16
+        unit: ''
+        access:
+        - read
+        - notify
+        - write
+        value-range:
+        - 20
+        - 1800
+        - 20
+    - name: power-consumption
+      description: Power Consumption
+      siid: 11
+      properties:
+      - name: power-consumption
+        standard_name: power_consumption
+        description: Power Consumption
+        description_cn: '用电量'
+        piid: 1
+        format: uint16
+        unit: ''
+        access:
+        - read
+        - notify
+        value-range:
+        - 0
+        - 65535
+        - 1
+      - name: electric-power
+        standard_name: electric_power
+        description: Electric Power
+        description_cn: '功率'
+        piid: 2
+        format: float
+        unit: watt
+        access:
+        - read
+        - notify
+        value-range:
+        - 0
+        - 10000
+        - 1
+    - name: on-off-count
+      description: on-off-count
+      siid: 12
+      properties:
+      - name: on-off-count
+        standard_name: on_off_count
+        description: on-off-count
+        description_cn: '开关次数'
+        piid: 1
+        format: uint8
+        unit: ''
+        access:
+        - read
+        - notify
+        value-range:
+        - 0
+        - 255
+        - 1
+      - name: temperature
+        standard_name: temperature
+        description: temperature
+        description_cn: '温度'
+        piid: 2
+        format: uint8
+        unit: celsius
+        access:
+        - read
+        - notify
+        value-range:
+        - 0
+        - 150
+        - 1
+    - name: indicator-light
+      description: Indicator Light
+      siid: 13
+      properties:
+      - name: 'on'
+        standard_name: 'indicator_light_status'
+        description: Switch Status
+        description_cn: '指示灯状态'
+        piid: 1
+        format: bool
+        unit: ''
+        access:
+        - read
+        - write
+        - notify
+        value-range: []
+    - name: charge-prt-ext
+      description: charge-prt-ext
+      siid: 14
+      properties:
+      - name: power
+        standard_name: charge_prt_ext_power
+        description: power
+        description_cn: '扩展充电保护功率'
+        piid: 1
+        format: uint16
+        unit: ''
+        access:
+        - read
+        - notify
+        - write
+        value-range:
+        - 2
+        - 600
+        - 1
+      - name: protect-time
+        standard_name: charge_prt_ext_protect_time
+        description: protect-time
+        description_cn: '扩展充电保护持续时长'
+        piid: 2
+        format: uint16
+        unit: ''
+        access:
+        - read
+        - notify
+        - write
+        value-range:
+        - 1
+        - 300
+        - 1
+    - name: power-limit-ext
+      description: power-limit-ext
+      siid: 15
+      properties:
+      - name: power-ext
+        standard_name: power_limit_ext_power
+        description: power-ext
+        description_cn: '扩展功率限制值'
+        piid: 1
+        format: uint16
+        unit: watt
+        access:
+        - read
+        - notify
+        - write
+        value-range:
+        - 300
         - 2500
         - 100

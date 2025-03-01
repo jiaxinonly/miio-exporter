@@ -12,14 +12,14 @@ def get_device_spec(device_type: str):
     }
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
+        print(response.text)
         device_spec = response.json()
-        print(device_spec)
         return device_spec
     else:
         print(f'请求失败，状态码：{response.status_code}')
 
 
-def convert_device_spec_to_yaml(device_spec: json):
+def convert_device_spec_to_yaml(device_spec: dict):
     # 提取需要的字段
     product = device_spec.get("props", {}).get("product", {})
     spec = device_spec.get("props", {}).get("spec", {})
@@ -35,8 +35,7 @@ def convert_device_spec_to_yaml(device_spec: json):
             }
         }
     }
-
-    services = dict(sorted(spec.get("services", {}).items()))
+    services = dict(sorted(spec.get("services", {}).items(), key=lambda item: int(item[0])))
 
     # 遍历services并提取信息
     for service in services.values():

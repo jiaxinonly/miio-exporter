@@ -43,10 +43,10 @@ if __name__ == '__main__':
         devices = cloud.get_devices()
         with open('device.yaml', 'r', encoding='utf-8') as yaml_file:
             device_yaml = safe_load(yaml_file)
-            for model in device_yaml.get('devices').key():
+            for model in device_yaml.get('devices').keys():
                 print(model)
                 for device in devices.values():
-                    if device.model == model and device.name == '软路由':
+                    if device.model == model and device.name == '热水器':
                         print(device)
                         verify_device_config(device_yaml, device.did, device.token, device.ip)
                         break
