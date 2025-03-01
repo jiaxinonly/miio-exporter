@@ -24,13 +24,16 @@ def convert_device_spec_to_yaml(device_spec: json):
     product = device_spec.get("props", {}).get("product", {})
     spec = device_spec.get("props", {}).get("spec", {})
 
+    model = product.get("model", "")
     # 初始化YAML数据结构
     yaml_data = {
-        "devices": [{
-            "model": product.get("model", ""),
-            "name": product.get("name", ""),
-            "services": []
-        }]
+        "devices": {
+            model : {
+                "model": model,
+                "name": product.get("name", ""),
+                "services": []
+            }
+        }
     }
 
     services = dict(sorted(spec.get("services", {}).items()))
@@ -46,20 +49,21 @@ def convert_device_spec_to_yaml(device_spec: json):
 
         # 遍历properties并提取信息
         for prop in service.get("properties", {}).values():
-            prop_info = {
-                "name": prop.get("name", ""),
-                "standard_name": prop.get("name", "").replace("-", "_"),  # 默认跟name一致，然后手动替换
-                "description": prop.get("description", ""),
-                "description_cn": "",  # 空值，手动输入
-                "piid": prop.get("iid", 0),
-                "format": prop.get("format", ""),
-                "unit": prop.get("unit", ""),
-                "access": prop.get("access", []),
-                "value-range": prop.get("value-range", [])
-            }
-            service_info["properties"].append(prop_info)
+            if "read" in prop.get('access'):
+                prop_info = {
+                    "name": prop.get("name", ""),
+                    "standard_name": prop.get("name", "").replace("-", "_"),  # 默认跟name一致，然后手动替换
+                    "description": prop.get("description", ""),
+                    "description_cn": "",  # 空值，手动输入
+                    "piid": prop.get("iid", 0),
+                    "format": prop.get("format", ""),
+                    "unit": prop.get("unit", ""),
+                    "access": prop.get("access", []),
+                    "value-range": prop.get("value-range", [])
+                }
+                service_info["properties"].append(prop_info)
 
-        yaml_data["devices"][0]["services"].append(service_info)
+        yaml_data["devices"][model]["services"].append(service_info)
 
     # 将YAML数据写入文件
     with open("device.yaml", 'w', encoding='utf-8') as yaml_file:
@@ -69,5 +73,5 @@ def convert_device_spec_to_yaml(device_spec: json):
 
 
 if __name__ == '__main__':
-    device_spec = get_device_spec("urn:miot-spec-v2:device:outlet:0000A002:chuangmi-212a01:3")
+    device_spec = get_device_spec("urn:miot-spec-v2:device:outlet:0000A002:cuco-v3:2")
     convert_device_spec_to_yaml(device_spec)

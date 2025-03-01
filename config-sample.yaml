@@ -1,4 +1,251 @@
 username: ''
 password: ''
 include:
+  - "软路由"
+exclude:
   - "热水器"
+  - "米家直流变频两季扇"
+  - "空调插座"
+  - "温湿度传感器"
+devices:
+  chuangmi.plug.212a01:
+    model: chuangmi.plug.212a01
+    name: 米家智能插座2 蓝牙网关版
+    services:
+      - name: switch
+        description: Switch
+        siid: 2
+        properties:
+          - name: 'on'
+            standard_name: 'switch_status'
+            description: Switch Status
+            description_cn: '开关状态'
+            piid: 1
+            format: bool
+            unit: ''
+            access:
+              - read
+              - write
+              - notify
+            value-range: [ ]
+          - name: temperature
+            standard_name: temperature
+            description: Temperature
+            description_cn: '温度'
+            piid: 6
+            format: uint8
+            unit: celsius
+            access:
+              - read
+              - notify
+            value-range:
+              - 0
+              - 255
+              - 1
+          - name: working-time
+            standard_name: working_time
+            description: Working Time
+            description_cn: '工作时间'
+            piid: 7
+            format: uint32
+            unit: minutes
+            access:
+              - read
+              - notify
+            value-range:
+              - 0
+              - 300
+              - 1
+      - name: indicator-light
+        description: Indicator Light
+        siid: 3
+        properties:
+          - name: 'on'
+            standard_name: 'indicator_light_status'
+            description: Switch Status
+            description_cn: '指示灯状态'
+            piid: 1
+            format: bool
+            unit: ''
+            access:
+              - read
+              - write
+              - notify
+            value-range: [ ]
+      - name: imilab-timer
+        description: imilab-timer
+        siid: 4
+        properties:
+          - name: on-duration
+            standard_name: timer_on_duration
+            description: on-duration
+            description_cn: '定时器打开时间'
+            piid: 1
+            format: uint32
+            unit: seconds
+            access:
+              - read
+              - notify
+              - write
+            value-range:
+              - 0
+              - 86500
+              - 1
+          - name: off-duration
+            standard_name: timer_off_duration
+            description: off-duration
+            description_cn: '定时器关闭时间'
+            piid: 2
+            format: uint32
+            unit: seconds
+            access:
+              - read
+              - notify
+              - write
+            value-range:
+              - 0
+              - 86500
+              - 1
+          - name: countdown
+            standard_name: timer_countdown
+            description: countdown
+            description_cn: '定时器倒计时'
+            piid: 3
+            format: uint32
+            unit: seconds
+            access:
+              - read
+              - notify
+              - write
+            value-range:
+              - 0
+              - 86500
+              - 1
+          - name: task-switch
+            standard_name: timer_task_switch
+            description: task-switch
+            description_cn: '定时器任务开关'
+            piid: 4
+            format: bool
+            unit: none
+            access:
+              - read
+              - notify
+              - write
+            value-range: [ ]
+          - name: countdown-info
+            standard_name: timer_countdown_info
+            description: countdown-info
+            description_cn: '定时器倒计时信息'
+            piid: 5
+            format: bool
+            unit: none
+            access:
+              - read
+              - notify
+            value-range: [ ]
+      - name: power-consumption
+        description: Power Consumption
+        siid: 5
+        properties:
+          - name: power-consumption
+            standard_name: power_consumption
+            description: Power Consumption
+            description_cn: '用电量'
+            piid: 1
+            format: uint32
+            unit: none
+            access:
+              - read
+              - notify
+            value-range:
+              - 0
+              - 65535000
+              - 1
+          - name: electric-current
+            standard_name: electric_current
+            description: Electric Current
+            description_cn: '电流'
+            piid: 2
+            format: uint16
+            unit: ''
+            access:
+              - read
+              - notify
+            value-range:
+              - 0
+              - 65535
+              - 1
+          - name: voltage
+            standard_name: voltage
+            description: Voltage
+            description_cn: '电压'
+            piid: 3
+            format: uint16
+            unit: ''
+            access:
+              - read
+              - notify
+            value-range:
+              - 0
+              - 65535
+              - 1
+          - name: electric-power
+            standard_name: electric_power
+            description: Electric Power
+            description_cn: '功率'
+            piid: 6
+            format: uint32
+            unit: watt
+            access:
+              - read
+              - notify
+            value-range:
+              - 0
+              - 6553500
+              - 1
+          - name: surge-power
+            standard_name: surge_power
+            description: Surge power
+            description_cn: '浪涌功率'
+            piid: 7
+            format: uint32
+            unit: ''
+            access:
+              - read
+              - notify
+            value-range:
+              - 0
+              - 65525
+              - 1
+      - name: functions-enable
+        description: functions-enable
+        siid: 7
+        properties:
+          - name: power-enable
+            standard_name: power_enable
+            description: power-enable
+            description_cn: '电源开启'
+            piid: 1
+            format: bool
+            unit: ''
+            access:
+              - read
+              - notify
+              - write
+            value-range: [ ]
+          - name: over-power
+            standard_name: over_power
+            description: ''
+            description_cn: '最大功率'
+            piid: 2
+            format: uint32
+            unit: ''
+            access:
+              - read
+              - notify
+              - write
+            value-range:
+              - 0
+              - 65525
+              - 1
