@@ -6,13 +6,24 @@ from yaml import safe_load
 from lib.logger import logger
 
 
-def load_config(config_path):
+def load_config_and_devices(config_path="config.yaml"):
     """加载配置文件"""
     with open(config_path, 'r', encoding='utf-8') as file:
         config = safe_load(file)
     logger.setLevel(config.get("log_level", "INFO").upper())
     logger.info("配置加载完成。。。")
-    return config
+
+    devices_config = config.get('devices', {})
+
+    # 获取设备列表
+    devices_list = get_cloud_devices(
+        config["username"], config["password"],
+        include=config.get("include", []),
+        exclude=config.get("exclude", [])
+    )
+    logger.info("设备列表加载完成")
+
+    return config, devices_config, devices_list
 
 
 def create_metrics_registry(config):
@@ -39,7 +50,7 @@ def create_metrics_registry(config):
 
 def get_cloud_devices(username, password, include=None, exclude=None):
     """从小米云平台获取设备列表"""
-    logger.info("查询设备。。。")
+    logger.info("云平台查询设备中，请等待。。。")
     cloud = CloudInterface(username, password)
     devices = cloud.get_devices()
     devices_list = []
@@ -80,7 +91,6 @@ def fetch_device_properties(ip, token, device_config):
 
 def update_metrics_from_device_data(metrics_list, device, device_config):
     """更新 Prometheus 指标数据"""
-
     data = fetch_device_properties(device.ip, device.token, device_config)
     for service in device_config.get('services', []):
         for property in service.get('properties', []):
