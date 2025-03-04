@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# File: verify_device_config.py
+# Time: 2025/3/2 17:41
+# Author: jiaxin
+# Email: 1094630886@qq.com
+
 from yaml import safe_load
 from miio import Device
 from miio.cloud import CloudInterface

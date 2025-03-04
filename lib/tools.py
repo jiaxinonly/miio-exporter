@@ -1,4 +1,9 @@
-import logging
+# -*- coding: utf-8 -*-
+# File: tools.py
+# Time: 2025/3/2 17:41
+# Author: jiaxin
+# Email: 1094630886@qq.com
+
 from miio.device import Device
 from miio.cloud import CloudInterface
 from prometheus_client import CollectorRegistry, Gauge
@@ -13,17 +18,15 @@ def load_config_and_devices(config_path="config.yaml"):
     logger.setLevel(config.get("log_level", "INFO").upper())
     logger.info("配置加载完成。。。")
 
-    devices_config = config.get('devices', {})
-
     # 获取设备列表
-    devices_list = get_cloud_devices(
+    config['devices_list'] = get_cloud_devices(
         config["username"], config["password"],
         include=config.get("include", []),
         exclude=config.get("exclude", [])
     )
-    logger.info("设备列表加载完成")
 
-    return config, devices_config, devices_list
+    logger.info("设备列表加载完成")
+    return config
 
 
 def create_metrics_registry(config):
@@ -89,18 +92,20 @@ def fetch_device_properties(ip, token, device_config):
     return data
 
 
-def update_metrics_from_device_data(metrics_list, device, device_config):
+def update_metrics_from_device_data(config, metrics_list):
     """更新 Prometheus 指标数据"""
-    data = fetch_device_properties(device.ip, device.token, device_config)
-    for service in device_config.get('services', []):
-        for property in service.get('properties', []):
-            standard_name = property.get('standard_name')
-            if standard_name != "cycle_data_value":
-                value = data.get(standard_name)
-                if value is not None:
-                    metric = metrics_list.get(standard_name)
-                    if metric:
-                        metric.labels(
-                            did=device.did, name=device.name, model=device.model,
-                            ip=device.ip, ssid=device.ssid, mac=device.mac
-                        ).set(value)
+    for device in config.get('devices_list'):
+        device_config = config['devices'][device.model]
+        data = fetch_device_properties(device.ip, device.token, device_config)
+        for service in device_config.get('services', []):
+            for property in service.get('properties', []):
+                standard_name = property.get('standard_name')
+                if standard_name != "cycle_data_value":
+                    value = data.get(standard_name)
+                    if value is not None:
+                        metric = metrics_list.get(standard_name)
+                        if metric:
+                            metric.labels(
+                                did=device.did, name=device.name, model=device.model,
+                                ip=device.ip, ssid=device.ssid, mac=device.mac
+                            ).set(value)

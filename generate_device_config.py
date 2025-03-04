@@ -1,4 +1,9 @@
-import json
+# -*- coding: utf-8 -*-
+# File: generate_device_config.py
+# Time: 2025/3/2 17:41
+# Author: jiaxin
+# Email: 1094630886@qq.com
+
 import yaml
 import requests
 
