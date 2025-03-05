@@ -13,6 +13,7 @@ from lib.tools import (
 )
 from lib.logger import logger
 from apscheduler.schedulers.background import BackgroundScheduler
+from prometheus_client.exposition import basic_auth_handler
 
 app = Flask(__name__)
 
@@ -33,8 +34,21 @@ if config['push_mode']['active']:
 def push_metrics():
     logger.info("推送数据。。。")
     update_metrics_from_device_data(config, metrics_list)
-    push_to_gateway(config['push_mode']['pushgateway_url'], job=config['push_mode']['job_name'],
-                    registry=registry)
+    if config.get("push_mode").get("basic_auth"):
+        push_to_gateway(config['push_mode']['pushgateway_url'], job=config['push_mode']['job_name'], registry=registry,
+                        handler=lambda url, method, timeout, headers, data: basic_auth_handler(url, method, timeout,
+                                                                                               headers, data,
+                                                                                               config.get(
+                                                                                                   "push_mode").get(
+                                                                                                   "basic_auth").get(
+                                                                                                   "username"),
+                                                                                               config.get(
+                                                                                                   "push_mode").get(
+                                                                                                   "basic_auth").get(
+                                                                                                   "password")))
+    else:
+        push_to_gateway(config['push_mode']['pushgateway_url'], job=config['push_mode']['job_name'],
+                        registry=registry)
     logger.info("推送成功。。。")
 
 

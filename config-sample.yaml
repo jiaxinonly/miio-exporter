@@ -1,6 +1,14 @@
 username: ''
 password: ''
-log_level: "debug"
+log_level: "info"
+push_mode:
+  active: false
+  pushgateway_url: https://pushgateway.xxxxx.com
+  job_name: "miio-exporter"
+  interval: 15
+  basic_auth:
+    username: admin
+    password: xxxxxx
 include:
   - "软路由"
   - "热水器"

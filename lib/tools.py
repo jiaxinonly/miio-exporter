@@ -16,6 +16,15 @@ def load_config_and_devices(config_path="config.yaml"):
     with open(config_path, 'r', encoding='utf-8') as file:
         config = safe_load(file)
     logger.setLevel(config.get("log_level", "INFO").upper())
+    if config.get("push_mode").get('active'):
+        logger.info("启用push_mode。。。")
+        if config.get("push_mode").get("basic_auth"):
+            if config.get("push_mode").get("basic_auth").get("username") and config.get("push_mode").get(
+                    "basic_auth").get("password"):
+                logger.info("push_mode使用basic_auth鉴权。。。")
+            else:
+                logger.error("账号密码不能为空，若不使用basic_auth请删除！")
+                exit()
     logger.info("配置加载完成。。。")
 
     # 获取设备列表
