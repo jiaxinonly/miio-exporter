@@ -20,3 +20,14 @@ prometheu-pushgateway 支持 HTTP Basic Auth 认证
     python app.py
     ```
 4.浏览器访问http://127.0.0.1/metrics
+
+## docker启动
+1. 创建目录，配置config.yaml
+```shell
+mkdir /usr/local/miio-exporter
+vi /usr/local/miio-exporter/config.yaml
+```
+2. 启动docker
+```shell
+docker run -d --name miio-exporter -v /usr/local/miio-exporter/config.yaml:/usr/local/miio-exporter/config.yaml jiaxinonly/miio-exporter
+```
