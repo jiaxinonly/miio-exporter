@@ -29,27 +29,26 @@ if config['push_mode']['active']:
     scheduler = BackgroundScheduler()
     scheduler.start()
 
-
-@scheduler.scheduled_job('interval', seconds=config['push_mode']['interval'])
-def push_metrics():
-    logger.info("推送数据。。。")
-    update_metrics_from_device_data(config, metrics_list)
-    if config.get("push_mode").get("basic_auth"):
-        push_to_gateway(config['push_mode']['pushgateway_url'], job=config['push_mode']['job_name'], registry=registry,
-                        handler=lambda url, method, timeout, headers, data: basic_auth_handler(url, method, timeout,
-                                                                                               headers, data,
-                                                                                               config.get(
-                                                                                                   "push_mode").get(
-                                                                                                   "basic_auth").get(
-                                                                                                   "username"),
-                                                                                               config.get(
-                                                                                                   "push_mode").get(
-                                                                                                   "basic_auth").get(
-                                                                                                   "password")))
-    else:
-        push_to_gateway(config['push_mode']['pushgateway_url'], job=config['push_mode']['job_name'],
-                        registry=registry)
-    logger.info("推送成功。。。")
+    @scheduler.scheduled_job('interval', seconds=config['push_mode']['interval'])
+    def push_metrics():
+        logger.info("推送数据。。。")
+        update_metrics_from_device_data(config, metrics_list)
+        if config.get("push_mode").get("basic_auth"):
+            push_to_gateway(config['push_mode']['pushgateway_url'], job=config['push_mode']['job_name'], registry=registry,
+                            handler=lambda url, method, timeout, headers, data: basic_auth_handler(url, method, timeout,
+                                                                                                   headers, data,
+                                                                                                   config.get(
+                                                                                                       "push_mode").get(
+                                                                                                       "basic_auth").get(
+                                                                                                       "username"),
+                                                                                                   config.get(
+                                                                                                       "push_mode").get(
+                                                                                                       "basic_auth").get(
+                                                                                                       "password")))
+        else:
+            push_to_gateway(config['push_mode']['pushgateway_url'], job=config['push_mode']['job_name'],
+                            registry=registry)
+        logger.info("推送成功。。。")
 
 
 @app.route('/metrics')
